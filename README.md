@@ -1,2 +1,2 @@
-# DPP_SKAT_TGBOT
-скат на ДПП
+# DPP_MAI_TGBOT
+ДПП
