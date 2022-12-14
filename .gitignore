@@ -1,3 +1,5 @@
 venv/
+.idea/
+**/__pycache__
 app/.env
-app/Sample2.html
+app/index.html
