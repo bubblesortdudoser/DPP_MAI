@@ -49,23 +49,39 @@ def callback_handler(call):
         test = Test.query.filter_by(id=call.data).first()
         question = test.question
         right_answer = test.right_answer
+        semi_answers = test.semi_answers
         answers = test.answers
         ansmsg = ''
         rightansmsg = ''
-        for rans in right_answer[0]:
+        semianswers = ''
+
+        for rans in right_answer:
             rightansmsg += str(rans) + ';'
+
+        print(semi_answers)
+
+        for rans in semi_answers:
+            semianswers += str(rans) + ';'
+
         i = 0
         for ans in answers:
             i += 1
             ansmsg += str(i) + ". " + ans + '\n'
 
+        if len(semi_answers) > 1 and '(мн.выбор)' not in question:
+            semianswers = "Один из них, эксперты сомневаются " + semianswers
+
+
         msg = f'''
 ❓ *Вопрос:*
 {question}\n
+**
 🎲 *Варианты ответов:*
 {ansmsg}
 ✅ *Правильные ответы:*
 {rightansmsg}
+✅ *Предположительно верные ответы:*
+{semianswers}
 '''
         bot.send_message(call.message.chat.id, msg, reply_markup=mp.off_markup, parse_mode="MARKDOWN")
 

@@ -14,6 +14,7 @@ class Test(conn.Model):
     question = conn.Column(conn.Text, nullable=False)
     right_answer = conn.Column(conn.PickleType, nullable=True)
     answers = conn.Column(conn.PickleType, nullable=False)
+    semi_answers = conn.Column(conn.PickleType, nullable=True)
 
     def __repr__(self):
         return self.question
@@ -21,7 +22,8 @@ class Test(conn.Model):
     def create(self,
                question: str,
                right_answer,
-               answers
+               answers,
+               semi_answers
                ):
         with app.app_context():
             if Test.query.filter_by(question=question).first():
@@ -30,6 +32,7 @@ class Test(conn.Model):
                 self.question = question,
                 self.right_answer = right_answer,
                 self.answers = answers
+                self.semi_answers = semi_answers
 
                 conn.session.add(self)
                 conn.session.commit()

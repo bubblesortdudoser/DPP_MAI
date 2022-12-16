@@ -21,8 +21,17 @@ def merge_data_in_db():
     def get_right_answer(answers):
         recv = []
         for i in range(len(answers)):
-            if 'True' in answers[i]:
-                answers[i] = answers[i].replace('True', '')
+            if '@true' in answers[i]:
+                answers[i] = answers[i].replace('@true', '')
+                recv.append(i + 1)
+
+        return None if len(recv) == 0 else recv
+
+    def get_semi_right_answer(answers):
+        recv = []
+        for i in range(len(answers)):
+            if '@probably' in answers[i]:
+                answers[i] = answers[i].replace('@probably', '')
                 recv.append(i + 1)
 
         return None if len(recv) == 0 else recv
@@ -38,12 +47,13 @@ def merge_data_in_db():
         test_data[question] = {
             'right_answer': get_right_answer(answers=answers),
             'answers': answers,
+            'semi_right_answer': get_semi_right_answer(answers=answers)
         }
 
     for key in test_data:
         val = test_data[key]
         test = Test()
-        output = test.create(question=key, right_answer=val['right_answer'], answers=val['answers'])
+        output = test.create(question=key, right_answer=val['right_answer'], answers=val['answers'], semi_answers=val['semi_right_answer'])
         print(output)
 
 
