@@ -7,6 +7,16 @@ freeze:
 deps:
 	pip install -r app/requirements.txt
 
+#---------------- App [DEV] ----------------
+
+.PHONY create_db:
+create_db:
+	cd app/ && flask commands create_db
+
+.PHONY parser:
+parser:
+	cd app/ && python parser.py
+
 #---------------- Docker-Compose ----------------------
 .PHONY docker_pgdb_build:
 docker_pgdb_build:
