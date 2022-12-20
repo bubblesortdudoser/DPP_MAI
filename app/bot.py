@@ -21,6 +21,13 @@ def start(message) -> None:
     except Exception as e:
         bot.reply_to(message, f'{e}')
 
+@bot.message_handler(commands=['help'])
+def help(message) -> None:
+    try:
+        bot.send_message(message.chat.id, mp.help_msg, reply_markup=mp.help_mp, parse_mode='MARKDOWN')
+    except Exception as e:
+        bot.reply_to(message, f'{e}')
+
 
 @bot.message_handler(content_types=["text"])
 def text_handler(message):
@@ -33,6 +40,7 @@ def text_handler(message):
         for data in output:
             i += 1
             for key in data:
+                print(data[key])
                 keys.append(key)
                 msg += f"{i}. {data[key]}\n"
         msg = bot.send_message(message.chat.id, msg, reply_markup=mp.get_inline_menu(keys), parse_mode='MARKDOWN')
@@ -55,21 +63,30 @@ def callback_handler(call):
         rightansmsg = ''
         semianswers = ''
 
-        for rans in right_answer:
-            rightansmsg += str(rans) + ';'
+        if right_answer[0] is None:
+            rightansmsg = 'Нет'
+        else:
+            for rans in right_answer:
+                rightansmsg += str(rans) + ';'
 
-        print(semi_answers)
+        print(type(right_answer))
 
-        for rans in semi_answers:
-            semianswers += str(rans) + ';'
+
+        if semi_answers is not None:
+            for rans in semi_answers:
+                semianswers += str(rans) + ';'
+
+            if len(semi_answers) > 1 and '(мн.выбор)' not in question:
+                semianswers = "Один из них, эксперты сомневаются " + semianswers
+        else:
+            semianswers = 'Нет'
+
+
 
         i = 0
         for ans in answers:
             i += 1
             ansmsg += str(i) + ". " + ans + '\n'
-
-        if len(semi_answers) > 1 and '(мн.выбор)' not in question:
-            semianswers = "Один из них, эксперты сомневаются " + semianswers
 
 
         msg = f'''
@@ -80,7 +97,7 @@ def callback_handler(call):
 {ansmsg}
 ✅ *Правильные ответы:*
 {rightansmsg}
-✅ *Предположительно верные ответы:*
+⚠️ *Предположительно верные ответы:*
 {semianswers}
 '''
         bot.send_message(call.message.chat.id, msg, reply_markup=mp.off_markup, parse_mode="MARKDOWN")

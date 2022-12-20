@@ -4,7 +4,7 @@ from config import app
 from db import conn
 import re
 
-soup = BeautifulSoup(open('Sample2.html', 'r'), 'lxml')
+soup = BeautifulSoup(open('Sample3.html', 'r'), 'lxml')
 
 
 def merge_data_in_db():
@@ -36,7 +36,7 @@ def merge_data_in_db():
 
         return None if len(recv) == 0 else recv
 
-    for i in range(len(p) - 1):
+    for i in range(len(ul)):
         qst = p[i].text.replace("\xa0", "")
         question = re.sub(r'\w+\. ', '', qst)
         test_data[question] = dict()

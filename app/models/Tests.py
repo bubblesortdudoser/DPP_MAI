@@ -54,6 +54,3 @@ class Test(conn.Model):
 
             return output
 
-
-
-
