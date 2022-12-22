@@ -1,4 +1,9 @@
-#---------------- Requirements ----------------
+#---------------- Clean cache ----------------
+.PHONY clean:
+clean:
+	cd app/ && find . -name __pycache__ -type d -print0|xargs -0 rm -r --
+
+#---------------- Dependencies ----------------
 .PHONY freeze:
 freeze:
 	pip freeze > app/requirements.txt
@@ -12,10 +17,6 @@ deps:
 .PHONY create_db:
 create_db:
 	cd app/ && flask commands create_db
-
-.PHONY parser:
-parser:
-	cd app/ && python parser.py
 
 #---------------- Docker-Compose ----------------------
 .PHONY docker_pgdb_build:
@@ -34,24 +35,3 @@ docker_pgdb_upd:
 grep_ipaddr:
 	docker inspect pgdb | grep IPAddress
 
-#---------------- Clean cache ----------------
-.PHONY clean:
-clean:
-	cd app/ && find . -name __pycache__ -type d -print0|xargs -0 rm -r --
-
-#---------------- Git ----------------
-.PHONY gadd:
-gadd:
-	git add .
-
-.PHONY gcom:
-gcom: # git commit -am "{com}" | com=<your comment>
-	git commit -am "$(com)"
-
-.PHONY gpush_dev:
-gpush_dev:
-	git push origin dev
-
-.PHONY gpull:
-gpull:
-	git pull
