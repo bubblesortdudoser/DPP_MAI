@@ -9,7 +9,7 @@ services:
   app:
     build: ./app
     container_name: dpp
-    command: gunicorn --bind 0.0.0.0:5000 app:app --access-logfile logs/slave.log
+    command: gunicorn --bind 0.0.0.0:5000 app.app:app --access-logfile logs/slave.log
     environment:
       - DATABASE_URL=postgresql://root:root@db:5432/db
     volumes:

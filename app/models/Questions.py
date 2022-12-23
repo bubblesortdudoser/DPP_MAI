@@ -13,13 +13,14 @@ from fuzzywuzzy import process
 class Question(conn.Model):
     id = conn.Column(conn.Integer, primary_key=True)
     question = conn.Column(conn.Text, nullable=False)
+    description = conn.Column(conn.Text, nullable=True)
     answers = conn.Column(conn.PickleType, nullable=False)
     media_uuid = conn.Column(conn.String(2048), nullable=True)
 
     def __repr__(self):
         return '<Question %r>' % self.question
 
-    def create(self, question: str, answers, media_uuid: Optional[str] = None):
+    def create(self, question: str, answers, description: Optional[str] = None, media_uuid: Optional[str] = None):
         """
         create question
         """
@@ -31,6 +32,7 @@ class Question(conn.Model):
 
                 self.question = question
                 self.answers = answers
+                self.description = description if description is not None else None
                 self.media_uuid = media_uuid if media_uuid is not None else None
 
                 conn.session.add(self)
@@ -46,9 +48,10 @@ class Question(conn.Model):
         with app.app_context():
             if Question.query.filter_by(question=self.question).first():
                 qst = Question.query.filter_by(question=self.question).first()
-                qst.api_id = question.question
-                qst.api_hash = question.answers
-                qst.phone = question.media_uuid
+                qst.question = question.question
+                qst.answers = question.answers
+                qst.description = question.description
+                qst.media_uuid = question.media_uuid
 
                 conn.session.commit()
                 return {"status": True, "msg": "question updated"}
