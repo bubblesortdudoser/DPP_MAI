@@ -1,0 +1,152 @@
+.expertLogin {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.expertTitle {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.expertLogin input {
+    margin: 0 auto;
+    max-width: 500px;
+    outline: 0;
+    font-family: 'Montserrat', sans-serif;
+    height: 28px;
+}
+
+.expertLogin button {
+    display: block;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.expertPanel {
+    width: 100%;
+}
+
+.expertPanelHeader {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.expertPanelHeader button {
+    display: block;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.expertPanelContentWrapper {
+    display: flex;
+    margin-top: 60px;
+    flex-direction: column;
+}
+
+.expertPanelContentWrapper h2 {
+    margin-bottom: 30px;
+}
+
+.expertPanelContentQuestionInfo {
+    display: flex;
+    flex-direction: column;
+    column-gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.inputLabel {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.input input {
+    height: 28px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.input .inputInput {
+    width: 250px;
+}
+
+.inputTextarea {
+    padding: 0.25rem 0.8rem;
+    resize: none;
+    max-width: 800px;
+    width: 100%;
+    height: 160px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.inputContent {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.inputCheckbox {
+    width: 28px;
+    height: 28px;
+    margin: 0;
+}
+
+.sep {
+    width: 250px;
+}
+
+.inpHelp {
+    display: flex;
+    column-gap: 20px;
+}
+
+.Help {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.expertPanelContentWrapper button {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    background-color: inherit;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search  input {
+    width: 100%;
+    height: 28px;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.search  input:hover,
+.search input:focus {
+    outline: 0;
+}
