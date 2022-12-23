@@ -22,6 +22,7 @@ def questions():
 
         if request.method == 'GET':
             qst = Question.query.filter(Question.question is not None).all()
+            list(map(lambda x: x.answers[0] if x.answers is tuple else x.answers, qst))
             return jsonify(list(map(lambda x: representation_question(x), qst)))
 
     except Exception as e:
@@ -34,6 +35,8 @@ def question(id):
         if request.method == 'GET':
             question = Question.query.filter_by(id=id).first()
             if question:
+                if type(question.answers) is tuple:
+                    question.answers = question.answers[0]
                 output = representation_question(question) if question is not None else jsonify('question does not exist')
                 return jsonify(output)
             return jsonify('question does not exist')

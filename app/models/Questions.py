@@ -49,7 +49,7 @@ class Question(conn.Model):
             if Question.query.filter_by(question=self.question).first():
                 qst = Question.query.filter_by(question=self.question).first()
                 qst.question = question.question
-                qst.answers = question.answers
+                qst.answers = question.answers[0]
                 qst.description = question.description
                 qst.media_uuid = question.media_uuid
 
