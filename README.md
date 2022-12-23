@@ -1,2 +1,0 @@
-# DPP_MAI_TGBOT
-ДПП
